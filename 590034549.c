@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include<string.h>
 
 struct Student {
     int sapid;
@@ -139,8 +140,68 @@ void displayStudents() {
         printf("\nCGPA: %.2f\n", calculateCGPA(i));
     }
 }
+
+void deleteStudent() {
+    int id, i, j, found = 0;
+
+    printf("Enter SAP ID to delete: ");
+    scanf("%d", &id);
+
+    for (i = 0; i < n; i++) {
+        if (s[i].sapid == id) {
+            for (j = i; j < n - 1; j++) {
+                s[j] = s[j + 1];
+            }
+
+            n--;
+            found = 1;
+            printf("Student deleted successfully!\n");
+            break;
+        }
+    }
+
+    if (found == 0) {
+        printf("Student not found!\n");
+    }
+}
+
+void sortBySAP() {
+    int i, j;
+    struct Student temp;
+
+    for (i = 0; i < n - 1; i++) {
+        for (j = i + 1; j < n; j++) {
+            if (s[i].sapid > s[j].sapid) {
+                temp = s[i];
+                s[i] = s[j];
+                s[j] = temp;
+            }
+        }
+    }
+
+    printf("Students sorted by SAP ID!\n");
+    displayStudents();
+}
+
+void sortByName() {
+    int i, j;
+    struct Student temp;
+
+    for (i = 0; i < n - 1; i++) {
+        for (j = i + 1; j < n; j++) {
+            if (strcmp(s[i].name, s[j].name) > 0) {
+                temp = s[i];
+                s[i] = s[j];
+                s[j] = temp;
+            }
+        }
+    }
+
+    printf("Students sorted by Name!\n");
+    displayStudents();
+}
 int main() {
-    int choice;
+    int choice, i;
 
     do {
         printf("\n===== STUDENT RECORD SYSTEM =====\n");
@@ -149,7 +210,10 @@ int main() {
         printf("3. Display All Students\n");
         printf("4. Calculate CGPA\n");
         printf("5. Average CGPA By Year\n");
-        printf("6. Exit\n");
+        printf("6. Delete Student\n");
+        printf("7. Sort By SAP ID\n");
+        printf("8. Sort By Name\n");
+        printf("9. Exit\n");
 
         printf("Enter your choice: ");
         scanf("%d", &choice);
@@ -164,8 +228,6 @@ int main() {
             displayStudents();
         }
         else if (choice == 4) {
-            int i;
-
             for (i = 0; i < n; i++) {
                 printf("%s CGPA: %.2f\n",
                        s[i].name, calculateCGPA(i));
@@ -175,13 +237,22 @@ int main() {
             averageCGPAByYear();
         }
         else if (choice == 6) {
+            deleteStudent();
+        }
+        else if (choice == 7) {
+            sortBySAP();
+        }
+        else if (choice == 8) {
+            sortByName();
+        }
+        else if (choice == 9) {
             printf("Thank you!\n");
         }
         else {
             printf("Invalid choice!\n");
         }
 
-    } while (choice != 6);
+    } while (choice != 9);
 
     return 0;
 }
