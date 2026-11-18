@@ -254,7 +254,10 @@ int main() {
         printf("10. Exits\n");
 
         printf("Enter your choice: ");
-        scanf("%d", &choice);
+        if(scanf("%d",&choice) != 1){
+            printf("Invalid input or input ended!\n");
+            break;
+        }
 
         if (choice == 1) {
             addStudent();

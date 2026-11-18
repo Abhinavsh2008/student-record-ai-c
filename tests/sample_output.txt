@@ -1,0 +1,14 @@
+Expected output summary
+
+===== STUDENT RECORD SYSTEM =====
+
+Student added successfully!
+
+Rahul CGPA: 9.00
+
+Student: Rahul
+CGPA: 9.00
+Excellent Performance!
+Maintain your current study pattern.
+
+Thank you!
