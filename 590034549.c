@@ -200,6 +200,43 @@ void sortByName() {
     printf("Students sorted by Name!\n");
     displayStudents();
 }
+
+void academicAdvisor() {
+    int i;
+    float cgpa;
+
+    if (n == 0) {
+        printf("No student records available!\n");
+        return;
+    }
+
+    for (i = 0; i < n; i++) {
+        cgpa = calculateCGPA(i);
+
+        printf("\nStudent: %s\n", s[i].name);
+        printf("CGPA: %.2f\n", cgpa);
+
+        if (cgpa == 0) {
+            printf("No SGPA available.\n");
+        }
+        else if (cgpa >= 9) {
+            printf("Excellent Performance!\n");
+            printf("Maintain your current study pattern.\n");
+        }
+        else if (cgpa >= 8) {
+            printf("Good Performance!\n");
+            printf("Keep practicing and improve weak subjects.\n");
+        }
+        else if (cgpa >= 6) {
+            printf("Needs Improvement!\n");
+            printf("Focus more on subjects with lower SGPA.\n");
+        }
+        else {
+            printf("Requires Immediate Attention!\n");
+            printf("Follow a study timetable and seek teacher guidance.\n");
+        }
+    }
+}
 int main() {
     int choice, i;
 
@@ -213,7 +250,8 @@ int main() {
         printf("6. Delete Student\n");
         printf("7. Sort By SAP ID\n");
         printf("8. Sort By Name\n");
-        printf("9. Exit\n");
+        printf("9. AI Academic Advisor\n");
+        printf("10. Exits\n");
 
         printf("Enter your choice: ");
         scanf("%d", &choice);
@@ -246,13 +284,16 @@ int main() {
             sortByName();
         }
         else if (choice == 9) {
+            academicAdvisor();
+        }
+        else if(choice == 10){
             printf("Thank you!\n");
         }
         else {
             printf("Invalid choice!\n");
         }
 
-    } while (choice != 9);
+    } while (choice != 10);
 
     return 0;
 }
